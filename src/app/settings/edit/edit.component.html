@@ -1,0 +1,94 @@
+<div *ngIf="pdvIdEdit == null || pdvIdEdit == undefined ; else elseBlockEdit">Selecione um PDV para exibir as configurações.</div>
+<ng-template #elseBlockEdit> 
+
+<h2>Configurações POS NAVS</h2>
+<H6>Meu PDV Id: {{ pdvIdEdit }}</H6>
+<!-- [formGroup]="signupForm -->
+<form [formGroup]='settingsForm' (submit)='onSubmit()'>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmpresa">Empresa</label>
+      <input type="text" formControlName='enterpriseid' class="form-control" id="inputEmpresa" placeholder="Empresa">
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputPdv">Terminal de Vendas (PDV)</label>
+      <input type="text" formControlName='pdvId' class="form-control" id="inputPdv" placeholder="PDV">
+    </div>
+  
+  <div class="form-group col-md-3">
+    <label for="inputSerialPos">Serial do POS</label>
+    <input type="text" formControlName='PosSerial' class="form-control" id="inputSerialPos" placeholder="1234...">
+  </div>
+</div>
+  <!-- <div class="form-group">
+    <label for="inputServidorTef">Endereço IP Servidor TEF</label>
+    <input type="text" class="form-control" id="inputServidorTef" placeholder="x.x.x.x">
+  </div> -->
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="inputServidorTef">Endereço Servidor TEF</label>
+      <input type="text" formControlName='sitefAddressIp' class="form-control" id="inputServidorTef" placeholder="x.x.x.x">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputPortSitef">Porta SITEF</label>
+      <input type="text" formControlName='sitefPort' class="form-control" id="inputPortSitef" placeholder="4096">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputCodeSitef">Código Empresa SITEF</label>
+      <input type="text" formControlName='sitefStoreCode' class="form-control" id="inputCodeSitef" placeholder="00000000">
+    </div>
+  </div>
+
+  <div class="form-row">
+      <div class="form-group col-md-6">
+          <label for="inputSatShare">Endereço SAT compartilhado</label>
+          <input type="text" formControlName='satAddressSharePdv' class="form-control" id="inputSatShare" placeholder="x.x.x.x">
+      </div>
+      <div class="form-group col-md-6">
+          <label for="inputSatPort">Porta SAT compartilhado</label>
+          <input type="text" formControlName='satPortSharePdv' class="form-control" id="inputSatPort" placeholder="9092">
+      </div>      
+  </div>
+
+  <!-- <div class="form-row">
+      <div class="form-group col-md-6">
+          <label for="inputNavsAddress">Endereço Servidor Navs</label>
+          <input type="text" formControlName='navsAddress' class="form-control" id="inputNavsAddress" placeholder="x.x.x.x">
+      </div>
+      <div class="form-group col-md-6">
+          <label for="inputNavsPort">Porta Navs</label>
+          <input type="text" formControlName='navsPort' class="form-control" id="inputNavsPort" placeholder="9092">
+      </div>      
+  </div> -->
+
+  <div class="form-row">
+      <div class="form-group col-md-6">
+          <label for="inputConcentratorAddress">Endereço Servidor Concentrador</label>
+          <input type="text" formControlName='concentratorAddress' class="form-control" id="inputConcentratorAddress" placeholder="x.x.x.x">
+      </div>
+      <div class="form-group col-md-6">
+          <label for="inputConcentratorPort">Porta Concentrador</label>          
+          <input type="text" formControlName='concentratorPort' class="form-control" id="inputConcentratorPort" placeholder="9092">
+      </div>      
+  </div>
+
+  <div class="form-row">
+      <div class="form-group col-md-6">
+          <label for="inputCharPlu">Número de caracteres PLU</label>
+          <!-- <input type="text" formControlName='charPlu' class="form-control" id="inputCharPlu" placeholder="4-6" [value]="navsSetting.NumberOfCharacteresPLU"> -->
+          <input type="text" formControlName='numberOfCharacteresPLU' class="form-control" id="inputCharPlu" placeholder="4-6">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="custom-control custom-checkbox mb-3">
+          <!-- <input type="checkbox" formControlName='saveXmlSat' class="custom-control-input" id="customControlValidation1" required [checked]="navsSetting.SaveXMLSat"> -->
+          <input type="checkbox" formControlName='saveXMLSat' class="custom-control-input" id="customControlValidation1" required [checked]='navsSetting.SaveXMLSat'>
+          <label class="custom-control-label" for="customControlValidation1">Salvar cupons SAT XML</label>
+          <div class="invalid-feedback">Example invalid feedback text</div>
+        </div>           
+    </div>
+    
+  <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+
+</ng-template>

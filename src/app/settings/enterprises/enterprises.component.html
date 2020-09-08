@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-md-4" *ngFor="let enterprise of enterprises">
+        <div class="alert border " role="alert"
+        [class.alert-success]="activated == enterprise.EnterpriseId" 
+        (click)="toactivate(enterprise.EnterpriseId)" 
+        [hidden]='isActive'>
+        <!-- 
+        
+        (mouseover)="onMouseOverOut(enterprise.FantasyName)" 
+        (mouseout)="onMouseOverOut()" 
+        [class.border-success]="active == category.Name" -->      
+          <p>Nome Fantasia: <b>{{ enterprise.FantasyName }}</b></p>
+          <p>Código: <b>{{ enterprise.EnterpriseCode }}</b></p>
+        </div>
+    </div>           
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <h6 *ngIf="enterpriseName != null">Empresa selecionada: {{ enterpriseName }}</h6>
+  </div>
+</div> 

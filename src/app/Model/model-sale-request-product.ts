@@ -1,0 +1,19 @@
+import { ModelProduct } from './model-product';
+import { ModelSaleRequest } from './model-sale-request';
+
+export class ModelSaleRequestProduct {
+    SaleRequestProductId: number;
+    ProductPriceLookUpCode: string;
+    Value: number;
+    Quantity: number;
+    Comments: string;
+    UserId: number;
+    IsCancelled: boolean;
+    IsDelivered: boolean;
+    ProductionStatus: number;
+    TotalLiquid: number;
+    ProductInternalCodeOnErp: number;
+    SaleRequestId: number;
+    Product: ModelProduct;
+    SaleRequest: ModelSaleRequest;
+}

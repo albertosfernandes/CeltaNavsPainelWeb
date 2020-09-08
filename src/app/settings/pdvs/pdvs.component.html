@@ -1,0 +1,31 @@
+<div class="row">
+    <p *ngIf="pdvs.length == 0">Não existe PDV para esta empresa</p>
+    <div *ngIf="pdvs == null || pdvs == undefined ; else elseBlock">Não existe PDV registrado para esta empresa.</div>
+    
+    <ng-template #elseBlock> 
+    <div class="col-md-4" *ngFor="let pdv of pdvs">
+        <div class="alert border " role="alert"
+        [class.alert-success]="activated == pdv.PdvId" 
+        (click)="toactivatePdv(pdv.PdvId)" >
+        <!-- 
+        
+        (mouseover)="onMouseOverOut(enterprise.FantasyName)" 
+        (mouseout)="onMouseOverOut()" 
+        [class.border-success]="active == category.Name" -->      
+          <p>PDV: <b>{{ pdv.PdvNumber }}</b></p>
+          <p>Pos Serial: <b>{{ pdv.MacAddress }}</b></p>          
+        </div>
+    </div>       
+    
+    <div class="col-md-12" *ngIf="activated != null">
+      <app-edit [enterpriseIdEdit]='enterpriseId' [pdvIdEdit]='teste'></app-edit>
+    </div>
+     
+  </ng-template>  
+
+  
+</div> 
+<!-- <app-enterprises (onClickFilter)="receberEvento($event)"></app-enterprises> -->
+
+    <!-- <app-edit [enterpriseId]='enterpriseId' (pdvFilter)='receberEventoDePdv($event)'></app-edit>  -->
+

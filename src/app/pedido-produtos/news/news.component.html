@@ -1,0 +1,11 @@
+<div class="my-3 p-3 bg-white rounded box-shadow">
+  <h6 class="border-bottom border-gray pb-2 mb-0">Últimas atualizações</h6>
+
+  <div class="alert alert-info" role="alert" *ngFor="let pedidoProduto of _saleRequestProducts" (click)="sendToDelivered(pedidoProduto.SaleRequestProductId)">
+    <p class="lead" style="font-size:30px ;"><strong>{{pedidoProduto.Product.Name}}</strong></p>
+    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+      <strong class="d-block text-gray-dark">Pedido: {{pedidoProduto.SaleRequest.PersonalizedCode}}</strong>
+      <strong class="d-block text-gray-dark">Quantidade: {{pedidoProduto.Quantity}}</strong>
+    </p>
+  </div>
+</div>
