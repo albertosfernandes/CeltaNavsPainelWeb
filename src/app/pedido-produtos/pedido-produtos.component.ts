@@ -20,15 +20,22 @@ export class PedidoProdutosComponent implements OnInit, OnChanges {
 
 
   constructor(private produtoPedidosService: PedidosService) {
-    setInterval(() => {this.loadSaleRequestsForDelivery();
+    setInterval(() => {this.loadSaleRequestsProducts();
     }, 4000);
    }
 
-  loadSaleRequestsForDelivery() {
-    this.produtoPedidosService.getSaleRequestProductsForDelivery()
+  loadSaleRequestsProducts() {
+    this.produtoPedidosService.getSaleRequestsProductionAll(0)
     .subscribe(sale => {
-      this._saleRequestProducts = sale;
-    } );
+      this.saleRequests = sale;
+    });
+  }
+
+  loadSaleRequestsProduction() {
+    this.produtoPedidosService.getSaleRequestsProductionAll(0)
+    .subscribe(sale => {
+      this.saleRequests = sale;
+    });
   }
 
   loadDelivered() {
@@ -41,7 +48,7 @@ export class PedidoProdutosComponent implements OnInit, OnChanges {
   sendToDelivery(value) {
     this.produtoPedidosService.updateSaleRequestProducts(value)
     .subscribe(data => {
-      this.loadSaleRequestsForDelivery();
+      this.loadSaleRequestsProducts();
       this.loadDelivered();
     },
     error => {
@@ -50,26 +57,25 @@ export class PedidoProdutosComponent implements OnInit, OnChanges {
   }
 
   sendToProduction(value) {
-    this.produtoPedidosService.changeProductionStatus(value, 1)
+    this.produtoPedidosService.updateStatusSaleRequestProductStatus(value, '1')
     .subscribe(data => {
     },
     error => {
       console.log('Erro: ' + error.data);
     },
     () => {
-      this.loadSaleRequestsForDelivery();
+      this.loadSaleRequestsProducts();
       this.loadDelivered();
     });
   }
 
   ngOnChanges() {
-    this.loadSaleRequestsForDelivery();
+    this.loadSaleRequestsProducts();
     this.loadDelivered();
-    console.log('Changes!!!!: ' + this.delivered);
   }
 
   ngOnInit() {
-    this.loadSaleRequestsForDelivery();
+    this.loadSaleRequestsProducts();
     this.loadDelivered();
   }
 

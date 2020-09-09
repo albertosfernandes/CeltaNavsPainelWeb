@@ -38,9 +38,20 @@ export class PedidosService {
     .get<ModelSaleRequest[]>(API + '/api/apiSaleRequest/GetAll?_enterpriseId=2');
   }
 
+  getSaleRequestsProductionAll(statusCode) {
+    return this.http
+    .get<ModelSaleRequest[]>(API + '/api/apiSaleRequest/GetProduction?_enterpriseId=2');
+  }
+
   updateSaleRequestProducts(_saleRequestProductId: string) {
     return this.http
     .put<string>(API + '/api/APISaleRequestProduct/Update?_saleRequestProductId=' + _saleRequestProductId, '');
+  }
+
+  updateStatusSaleRequestProductStatus(_saleRequestProductId: string, statusproductionCode: string) {
+    return this.http
+    // tslint:disable-next-line: max-line-length
+    .put<string>(API + '/api/APISaleRequestProduct/UpdateStatus?_saleRequestProductId=' + _saleRequestProductId + '&statusproductioncocde=' + statusproductionCode , '');
   }
 
   atualizaPedidoProduto(_pedidoProd) {

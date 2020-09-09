@@ -12,5 +12,5 @@ export class ModelSaleRequest {
     FlagStatus: string;
     TotalLiquid: number;
     FlagOrigin: string;
-    Products: ModelSaleRequestProduct[] = [];    
+    Products: ModelSaleRequestProduct[] = [];
 }

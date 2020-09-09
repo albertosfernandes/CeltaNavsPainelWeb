@@ -1,3 +1,4 @@
+import { ModelSaleRequest } from './../../Model/model-sale-request';
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { ModelSaleRequestProduct } from 'src/app/Model/model-sale-request-product';
 import { PedidosService } from '../pedidos.service';
@@ -10,6 +11,7 @@ import { PedidosService } from '../pedidos.service';
 export class NewsComponent implements OnInit, OnChanges {
 
   @Input() _saleRequestProducts: ModelSaleRequestProduct[] = [];
+  @Input() saleRequests: ModelSaleRequest[] = [];
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onClickDelivered = new EventEmitter<string>();
 
@@ -18,6 +20,21 @@ export class NewsComponent implements OnInit, OnChanges {
   sendToDelivered(value) {
     this.onClickDelivered.emit(value);
     this.loadSaleRequestsForDelivery();
+  }
+
+  loadSaleRequestsProduction() {
+    this.produtoPedidosService.getSaleRequestsProductionAll(0)
+    .subscribe(sale => {
+      this.saleRequests = sale;
+      console.log(this.saleRequests[0]);
+    });
+  }
+
+  loadSaleRequestsProducts() {
+    this.produtoPedidosService.getSaleRequestsProductionAll(0)
+    .subscribe(sale => {
+      this.saleRequests = sale;
+    });
   }
 
   loadSaleRequestsForDelivery() {
@@ -31,7 +48,7 @@ export class NewsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.loadSaleRequestsForDelivery();
+    this.loadSaleRequestsProduction();
   }
 
 }

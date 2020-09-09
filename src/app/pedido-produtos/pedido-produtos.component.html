@@ -1,11 +1,9 @@
-
-  <!--<app-news    [saleRequestProducts]="pedidosProdutos"></app-news>-->
   <div class="row">
-    <div class="col-sm">
-      <app-news [_saleRequestProducts]='_saleRequestProducts' (onClickDelivered)='sendToProduction($event)'></app-news>
+    <div class="col-2">
+      <app-news [saleRequests]='saleRequests' ></app-news>
     </div>
     <div class="col-sm">
-      <app-production [_saleRequestProducts]='_saleRequestProductsDelivered'></app-production>
+      <app-production [_saleRequests]='saleRequests' (onClickDelivered)='sendToProduction($event)'></app-production>  //updateStatusSaleRequestProductStatus
     </div>
     <div class="col-sm">
       <app-delivered [_saleRequestProductsDelivered]='_saleRequestProductsDelivered'></app-delivered>
