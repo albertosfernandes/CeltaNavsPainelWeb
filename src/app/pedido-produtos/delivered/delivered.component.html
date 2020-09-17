@@ -3,7 +3,7 @@
 
   <div class="alert alert-success" role="alert" *ngFor="let produtosEntregues of _saleRequests">
     <div *ngFor="let produtos of produtosEntregues.Products">
-      <div *ngIf="produtos.ProductionStatus === 1">
+      <div *ngIf="produtos.ProductionStatus === 2">
     <p class="lead" style="font-size:30px ;"><strong>{{produtos.Product.Name}}</strong></p>
     <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
       <strong class="d-block text-gray-dark">Quantidade: {{produtos.Quantity}}</strong>

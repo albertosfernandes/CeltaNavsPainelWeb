@@ -5,6 +5,7 @@ import { DeliveredComponent } from './delivered/delivered.component';
 import { NewsComponent } from './news/news.component';
 import { PedidoProdutosComponent } from './pedido-produtos.component';
 import { ProductionComponent } from './production/production.component';
+import { ProductDeliveredComponent } from './news/product-delivered/product-delivered.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { ProductionComponent } from './production/production.component';
     PedidoProdutosComponent,
     NewsComponent,
     DeliveredComponent,
-    ProductionComponent
+    ProductionComponent,
+    ProductDeliveredComponent
   ]
 })
 export class PedidoProdutosModule { }

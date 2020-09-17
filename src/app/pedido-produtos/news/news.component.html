@@ -1,11 +1,45 @@
-<div class="my-3 p-3 bg-white rounded box-shadow">
-  <h6 class="border-bottom border-gray pb-2 mb-0">Pedidos</h6>
+  <div class="row mb-0" >
 
-  <div class="alert alert-info" role="alert" *ngFor="let pedido of saleRequests" >
-    <p class="lead" style="font-size:30px;" *ngFor="let pedidoprods of pedido.Products"><strong>Pedido: </strong>{{pedido.PersonalizedCode}}</p>
-    <!-- <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">   (click)="sendToDelivered(pedidoProduto.SaleRequestProductId)"
-      <strong class="d-block text-gray-dark">Pedido: {{pedidoProduto.SaleRequest.PersonalizedCode}}</strong>
-      <strong class="d-block text-gray-dark">Quantidade: {{pedidoProduto.Quantity}}</strong>
-    </p> -->
+  <div class='col-2 alert-light-white' style="vertical-align:center">
+    <h3>Pedido: </h3>
+    <h1> {{ pedido.PersonalizedCode }} </h1>
   </div>
+
+  <div class="col-6 alert-warning "> <!--Coluna Em Produção-->
+    <div class="row border-bottom border-warning mb-1" *ngFor="let saleRequestProduct of saleRequestsProduction" (click)='sendToDelivered(saleRequestProduct.SaleRequestProductId)'>
+      <div class="col-12 mb-0 y-0">
+        <span class="h4">{{saleRequestProduct.Product.NameReduced}}</span>
+      </div>
+      <div class="col-12 mt-0 y-0" >
+        <span class="h8" style="color: red;"><strong>QUANTIDADE: <span class="h4">{{saleRequestProduct.Quantity}}</span> </strong></span>
+      </div>
+    </div>
+  </div> <!--Fim Coluna Em Produção-->
+
+  <div class="col-4 alert-success border border-success"> <!--Coluna Pronto para entrega-->
+    <div class="row border-bottom border-success mb-1" *ngFor="let _saleRequestProductDevliveredNew of saleRequestsDelivered" (click)='onclickUpdateStatus(_saleRequestProductDevliveredNew.SaleRequestProductId)'>
+      <div class="col-12 mb-0 y-0">
+        <span class="h4">{{_saleRequestProductDevliveredNew.Product.NameReduced}}</span>
+      </div>
+      <div class="col-12 mt-0 y-0" >
+        <span class="h8" style="color: red;"><strong>QUANTIDADE: <span class="h4">{{_saleRequestProductDevliveredNew.Quantity}}</span> </strong></span>
+      </div>
+    </div>
+  </div> <!--Fim Coluna Pronto para Entrega-->
+
 </div>
+<div id='moreInfo' class="row mt-0">
+  <div class="col-12 ">
+    <div class="row ">
+    <div class="col-6 col-md-5">
+    </div>
+    <div class="col-6 col-md-2" style="text-align:center;">
+      <!-- <div class="col-6 col-md-2 border-bottom border-danger rounded-circle" style="text-align:center;"></div> -->
+      <span style="color: red;" (click)='onclickMoreInfo(pedido.SaleRequestId)'><i class="fa fa-plus" aria-hidden="true"></i></span>
+    </div>
+    <div class="col-6 col-md-5">
+    </div>
+  </div>
+  <app-product-delivered *ngIf="isShowDelivered" [pedidoId]='pedido.SaleRequestId' (clickForLoadSaleRequest)='sendForLoadSaleRequest()'></app-product-delivered>
+  </div>
+  </div>

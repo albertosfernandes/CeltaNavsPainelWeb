@@ -1,21 +1,28 @@
+import { ModelSaleRequestProduct } from './../Model/model-sale-request-product';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { ModelPedidoProdutos } from '../Model/ModelPedidoProdutos';
 import { ModelSaleRequest } from './../Model/model-sale-request';
-import { ModelSaleRequestProduct } from '../Model/model-sale-request-product';
 
 const API = 'http://localhost:10965';
+// const API = 'http://localhost:1096';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PedidosService {
 
+  constructor(private http: HttpClient) { }
 
   getSaleRequestProducts() {
     return this.http
     .get<ModelSaleRequestProduct[]>(API + '/api/APISaleRequestProduct/GetAll?_enterpriseId=2');
+  }
+
+  getSaleRequestProductsNew(_saleRequestProductId: string) {
+    return this.http
+    .get<ModelSaleRequestProduct[]>(API + '/api/APISaleRequestProduct/Get?_enterpriseId=2&saleRequesId=' + _saleRequestProductId);
   }
 
   getSaleRequestProductsForDelivery() {
@@ -28,19 +35,24 @@ export class PedidosService {
     .get<ModelSaleRequestProduct[]>(API + '/api/APISaleRequestProduct/GetAll?_enterpriseId=2&_isConsiderDelivery=true');
   }
 
-  getPedidoProdutosAll() {
-    return this.http
-    .get<ModelPedidoProdutos[]>(API + '/api/apiSaleRequest/GetAll?_enterpriseId=2');
-  }
+  // getPedidoProdutosAll() {
+  //   return this.http
+  //   .get<ModelPedidoProdutos[]>(API + '/api/apiSaleRequest/GetAll?_enterpriseId=2');
+  // }
 
   getSaleRequestsAll() {
     return this.http
-    .get<ModelSaleRequest[]>(API + '/api/apiSaleRequest/GetAll?_enterpriseId=2');
+    .get<ModelSaleRequest[]>(API + '/api/apiSaleRequest/GetAll?_enterpriseId=2&isConsiderDelivered=1');
   }
 
   getSaleRequestsProductionAll(statusCode) {
     return this.http
     .get<ModelSaleRequest[]>(API + '/api/apiSaleRequest/GetProduction?_enterpriseId=2');
+  }
+
+  getSaleRequestProductsIsDelivered(saleReqId) {
+    return this.http
+    .get<ModelSaleRequestProduct[]>(API + '/api/APISaleRequestProduct/GetIsDelivered?_enterpriseId=2&_saleRequestId=' + saleReqId);
   }
 
   updateSaleRequestProducts(_saleRequestProductId: string) {
@@ -72,5 +84,5 @@ export class PedidosService {
     .get(API + '/api/APISaleRequestProduct/ChangeProductionStatus?_saleRequestProductId=' + _saleReqProdId + '&productionstatus=' + statuscode);
   }
 
-  constructor(private http: HttpClient) { }
+
 }

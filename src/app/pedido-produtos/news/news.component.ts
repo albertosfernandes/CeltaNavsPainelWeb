@@ -10,45 +10,89 @@ import { PedidosService } from '../pedidos.service';
 })
 export class NewsComponent implements OnInit, OnChanges {
 
-  @Input() _saleRequestProducts: ModelSaleRequestProduct[] = [];
-  @Input() saleRequests: ModelSaleRequest[] = [];
+  // @Input() _saleRequestProducts: ModelSaleRequestProduct[] = [];
+  @Input() _saleRequestProductsNew: ModelSaleRequestProduct[] = [];
+  // @Input() saleRequests: ModelSaleRequest[] = [];
+  @Input() pedido: ModelSaleRequest;
+  saleRequestsProduction: ModelSaleRequestProduct[] = [];
+  saleRequestsDelivered: ModelSaleRequestProduct[] = [];
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onClickDelivered = new EventEmitter<string>();
+  // tslint:disable-next-line: no-output-on-prefix
+  @Output() onClickLoadSaleRequest = new EventEmitter();
+  isShowDelivered = false;
 
-  constructor(private produtoPedidosService: PedidosService) { }
+
+  constructor(private produtoPedidosService: PedidosService) {
+    //  setInterval(() => {this.loadSaleRequestsNew(this.pedido.SaleRequestId);
+    //  }, 4000);
+  }
 
   sendToDelivered(value) {
     this.onClickDelivered.emit(value);
-    this.loadSaleRequestsForDelivery();
   }
 
-  loadSaleRequestsProduction() {
-    this.produtoPedidosService.getSaleRequestsProductionAll(0)
-    .subscribe(sale => {
-      this.saleRequests = sale;
-      console.log(this.saleRequests[0]);
+  sendForLoadSaleRequest() {
+    alert('Chamou metodo no component News');
+  }
+
+  loadSaleRequestsNew (_saleRequestId) {
+    this.produtoPedidosService.getSaleRequestProductsNew(_saleRequestId)
+    .subscribe(saleReqProds => {
+      this._saleRequestProductsNew = saleReqProds;
+    },
+    error => {
+      console.log('Erro ao carregar produtos dos pedidos');
+    },
+    () => {
+      this.loadSaleRequestProductsInProduction();
+      this.loadSaleRequestsProductsForDelivered();
     });
   }
 
-  loadSaleRequestsProducts() {
-    this.produtoPedidosService.getSaleRequestsProductionAll(0)
-    .subscribe(sale => {
-      this.saleRequests = sale;
+  loadSaleRequestProductsInProduction() {
+    this.saleRequestsProduction = [];
+    this._saleRequestProductsNew.forEach(element => {
+      if (element.ProductionStatus === 0) {
+        this.saleRequestsProduction.push(element);
+      }
     });
   }
 
-  loadSaleRequestsForDelivery() {
-    this.produtoPedidosService.getSaleRequestProductsForDelivery()
-    .subscribe(sale => {
-      this._saleRequestProducts = sale;
+  loadSaleRequestsProductsForDelivered() {
+    this.saleRequestsDelivered = [];
+    this._saleRequestProductsNew.forEach(element => {
+      if (element.ProductionStatus === 2) {
+        this.saleRequestsDelivered.push(element);
+      }
+    });
+  }
+
+  onclickMoreInfo(value) {
+    this.isShowDelivered = !this.isShowDelivered;
+  }
+
+  onclickUpdateStatus(value) {
+    this.produtoPedidosService.updateSaleRequestProducts(value)
+    .subscribe(data => {
+      console.log('atualizado com sucesso');
+    },
+    error => {
+      console.log('Erro ao atualizar o status do produto');
+    },
+    () => {
+      this.loadSaleRequestsNew(this.pedido.SaleRequestId);
+      this.onClickLoadSaleRequest.emit();
     });
   }
 
   ngOnInit() {
+    this.loadSaleRequestsNew(this.pedido.SaleRequestId);
   }
 
   ngOnChanges() {
-    this.loadSaleRequestsProduction();
+    this.loadSaleRequestsNew(this.pedido.SaleRequestId);
+    console.log('change news.');
   }
 
 }

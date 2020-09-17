@@ -1,11 +1,35 @@
-  <div class="row">
-    <div class="col-2">
+
+    <!-- <div>
       <app-news [saleRequests]='saleRequests' ></app-news>
-    </div>
-    <div class="col-sm">
-      <app-production [_saleRequests]='saleRequests' (onClickDelivered)='sendToProduction($event)'></app-production>  //updateStatusSaleRequestProductStatus
-    </div>
-    <div class="col-sm">
+    </div> -->
+    <!-- <div class="col-1">
+      <app-production [_saleRequests]='saleRequests' (onClickDelivered)='sendToProduction($event)'></app-production>
+    </div> -->
+    <!-- <div class="col-1">
       <app-delivered [_saleRequestProductsDelivered]='_saleRequestProductsDelivered'></app-delivered>
+    </div> -->
+
+
+<div class="container mt-4">
+  <div class="col-12"> <!--Div de cabeçalho-->
+    <div class="row">
+      <div class="col-6 col-md-4">
+        <h4>Pedidos</h4>
+      </div>
+      <div class="col-6 col-md-4">
+        <h4>Em produção</h4>
+      </div>
+      <div class="col-6 col-md-4">
+        <h4>Pronto para entrega</h4>
+      </div>
     </div>
-  </div>
+   </div> <!--Fim div cabeçalho-->
+   <div class="row"> <!--Div linha principal-->
+     <div class="col-12">
+        <div class="row alert-light border rounded mb-3" *ngFor="let _saleRequest of saleRequests" > <!--Pedidos-  *ngIf="isShow" -->
+            <app-news [pedido]='_saleRequest' class='col-12' (onClickDelivered)='sendToDelivery($event)' (onClickLoadSaleRequest)='loadSaleRequests()'></app-news>
+        </div> <!--Fim Pedidos-->
+    </div> <!--Fim Div col12-->
+  </div> <!--Fim Div linha principal-->
+  </div><!--Fim div conteiner principal-->
+
