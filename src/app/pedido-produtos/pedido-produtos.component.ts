@@ -19,7 +19,10 @@ export class PedidoProdutosComponent implements OnInit, OnChanges {
   _pedidoId = '0';
 
 
-  constructor(private produtoPedidosService: PedidosService) {   }
+  constructor(private produtoPedidosService: PedidosService) {
+      setInterval(() => {this.loadSaleRequests();
+     }, 4000);
+   }
 
    loadSaleRequests() {
      this.produtoPedidosService.getSaleRequestsAll()
