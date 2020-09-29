@@ -1,14 +1,17 @@
 <div id='salequestfinalized' class="row">
   <div class="col-6 col-md-12 alert alert-danger mb-0">
 
-    <div class="row border-bottom border-warning mb-1" *ngFor="let _saleRequestProduct of saleRequestProducts" (click)='emit()'>
-      <div class="col-12 mb-0 y-0">
-        <span class="h4">{{_saleRequestProduct.Product.NameReduced}}</span>
+    <div *ngFor="let _saleRequestProduct of saleRequestProducts" >
+    <div class="row border-bottom border-warning mb-1 d-flex justify-content-between" (click)='emit(_saleRequestProduct.SaleRequestProductId)'>
+      <div>
+        <span class="h4" style="text-transform: uppercase;">{{_saleRequestProduct.Product.NameReduced}}</span>
       </div>
-      <div class="col-12 mt-0 y-0" >
-        <span class="h8" style="color: red;"><strong>QUANTIDADE: <span class="h4">{{_saleRequestProduct.Quantity}}</span> </strong></span>
+      <div>
+        <em> {{_saleRequestProduct.DateHourOfCreation | date:'HH:mm'}}</em>
+        <span class="h8 ml-3" style="color: red;"><strong>QUANTIDADE: <span class="h4">{{_saleRequestProduct.Quantity}}</span> </strong></span>
       </div>
     </div>
+  </div>
 
   </div>
 </div>

@@ -8,6 +8,7 @@ export class ModelSaleRequestProduct {
     Quantity: number;
     Comments: string;
     UserId: number;
+    DateHourOfCreation: string;
     IsCancelled: boolean;
     IsDelivered: boolean;
     ProductionStatus: number;

@@ -24,8 +24,9 @@ export class ProductDeliveredComponent implements OnInit {
   //   });
   // }  getSaleRequestProductsIsDelivered
 
-  emit() {
-    this.clickForLoadSaleRequest.emit('clicado');
+  emit(salereqprodId) {
+    this.clickForLoadSaleRequest.emit(salereqprodId);
+    console.log('valor da emit' + salereqprodId);
   }
 
   loadSaleRequestProductsDelivered() {

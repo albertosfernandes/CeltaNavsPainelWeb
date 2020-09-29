@@ -19,10 +19,7 @@ export class PedidoProdutosComponent implements OnInit, OnChanges {
   _pedidoId = '0';
 
 
-  constructor(private produtoPedidosService: PedidosService) {
-      setInterval(() => {this.loadSaleRequests();
-     }, 4000);
-   }
+  constructor(private produtoPedidosService: PedidosService) { }
 
    loadSaleRequests() {
      this.produtoPedidosService.getSaleRequestsAll()
@@ -34,7 +31,8 @@ export class PedidoProdutosComponent implements OnInit, OnChanges {
        console.log('Erro ao carregar pedidos');
      },
      () => {
-
+      // setInterval(() => {this.loadSaleRequests();
+      // }, 4000);
      });
    }
 
@@ -46,6 +44,19 @@ export class PedidoProdutosComponent implements OnInit, OnChanges {
     },
     error => {
       console.log('Erro: ' + error.data);
+    },
+    () => {
+      this.loadSaleRequests();
+    });
+  }
+
+  BackToDelivery(value) {
+    this.produtoPedidosService.updateSaleRequestProductsUnMark(value)
+    .subscribe(data => {
+
+    },
+    error => {
+
     },
     () => {
       this.loadSaleRequests();

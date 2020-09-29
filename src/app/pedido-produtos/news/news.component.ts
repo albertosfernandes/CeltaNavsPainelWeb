@@ -32,8 +32,29 @@ export class NewsComponent implements OnInit, OnChanges {
     this.onClickDelivered.emit(value);
   }
 
-  sendForLoadSaleRequest() {
-    alert('Chamou metodo no component News');
+  BackToDelivery(value) {
+    this.produtoPedidosService.updateSaleRequestProductsUnMark(value)
+    .subscribe(data => {
+
+    },
+    error => {
+
+    },
+    () => {
+      // this.loadSaleRequests();
+    });
+  }
+  backToDelivered(value) {
+
+  }
+
+  back() {
+    alert('volta ai');
+  }
+
+  sendForLoadSaleRequest(value) {
+    alert(value);
+    this.BackToDelivery(value);
   }
 
   loadSaleRequestsNew (_saleRequestId) {
